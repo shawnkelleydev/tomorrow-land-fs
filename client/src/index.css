@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  background: #00022c;
+  color: white;
+}
+
+.App {
+  padding: 10px;
+  min-height: 100vh;
+}
+
+header, .signin--div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+header p, header h1, .signin--input, .signin--submit {
+  margin-bottom: 20px;
+}
+
+input, button {
+  height: 50px;
+  width: 100%;
+}
+
+input, .name, .amt {
+  padding-left: 10px;
+}
+
+footer {
+  text-align: center;
+}
+
+.edit {
+  display: none;
+}
+
+.income, .outgo, .data, .bal-div {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: auto 100px 50px;
+      grid-template-columns: auto 100px 50px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.income label, .outgo label {
+  position: absolute;
+}
+
+.income label span, .outgo label span {
+  position: relative;
+}
+
+.income label span {
+  top: 40px;
+}
+
+.outgo label span {
+  bottom: 40px;
+}
+
+.bal-div {
+  margin: 30px 0;
+}
+
+.mid, .signin--p {
+  margin: 20px 0;
+}
+
+.negative {
+  color: red;
+}
+
+.positive {
+  color: lime;
+}
+
+.list-div li {
+  background: #4f005d;
+}
+
+button {
+  border: none;
+  color: white;
+  background: #9d00a3;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 1.2em;
+}
+
+.plus {
+  width: 20px;
+}
+
+.signout, a {
+  color: #f700ff;
+}
+/*# sourceMappingURL=index.css.map */
