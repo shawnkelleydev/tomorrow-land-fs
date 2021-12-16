@@ -7,8 +7,8 @@ import List from "./List";
 import Input from "./Input";
 import SignIn from "./SignIn";
 
-const entryUrl = "https://tomorrow-land-skd.herokuapp.com/api/entry";
-const userUrl = "https://tomorrow-land-skd.herokuapp.com/api/users";
+const entryUrl = "https://localhost:8080/api/entry";
+const userUrl = "https://localhost:8080/api/users";
 
 class App extends React.Component {
   /*
