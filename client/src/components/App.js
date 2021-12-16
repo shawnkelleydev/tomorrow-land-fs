@@ -7,8 +7,8 @@ import List from "./List";
 import Input from "./Input";
 import SignIn from "./SignIn";
 
-const entryUrl = "https://localhost:8080/api/entry";
-const userUrl = "https://localhost:8080/api/users";
+const entryUrl = "http://localhost:8080/api/entry";
+const userUrl = "http://localhost:8080/api/users";
 
 class App extends React.Component {
   /*
@@ -28,6 +28,8 @@ class App extends React.Component {
     outAmt: "",
     user: {},
     password: "",
+    errors: null,
+    signedUp: true,
   };
 
   /* ===================
@@ -48,7 +50,7 @@ class App extends React.Component {
     axios
       .get(url, { auth })
       .then((res) => {
-        this.setState({ user: res.data.user });
+        this.setState({ user: res.data.user, errors: null });
       })
       .then((x) => {
         const url = entryUrl;
@@ -63,7 +65,10 @@ class App extends React.Component {
             this.setState({ entries });
           })
           .then((e) => this.updateBalance());
-      });
+      })
+      .catch((err) =>
+        console.error("Invalid credentials in local storage. ", err)
+      );
   }
 
   /* ===================
@@ -94,9 +99,13 @@ class App extends React.Component {
       .then((res) => {
         axios
           .get(url, { auth })
-          .then((res) => this.setState({ user: res.data.user, password }));
+          .then((res) =>
+            this.setState({ user: res.data.user, password, errors: null })
+          );
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        this.setState({ errors: err.response.data.errors });
+      });
   }
 
   signIn(e) {
@@ -108,13 +117,17 @@ class App extends React.Component {
       username,
       password,
     };
+
     this.setState({ password });
-    axios.get(url, { auth }).then((res) => {
-      this.setState({ user: res.data.user });
-      localStorage.setItem("username", username);
-      localStorage.setItem("password", password);
-      this.updateBalance();
-    });
+    axios
+      .get(url, { auth })
+      .then((res) => {
+        this.setState({ user: res.data.user, errors: null });
+        localStorage.setItem("username", username);
+        localStorage.setItem("password", password);
+        this.updateBalance();
+      })
+      .catch((err) => this.setState({ errors: err.response.data.message }));
   }
 
   signOut() {
@@ -127,12 +140,6 @@ class App extends React.Component {
     SUBMIT
   
   ======= */
-
-  /*
-  
- 
-
-  */
 
   handleSubmit(e) {
     e.preventDefault();
@@ -353,6 +360,11 @@ class App extends React.Component {
     // amtInput.value = data.querySelector(".amt").innerText;
   }
 
+  //swith sign in / sign up
+  switchSignUp = () => {
+    this.setState({ signedUp: !this.state.signedUp });
+  };
+
   /* =======
   
     RENDER
@@ -424,8 +436,11 @@ class App extends React.Component {
         <div className="App">
           <Header user={this.state.user} />
           <SignIn
+            signedUp={this.state.signedUp}
             signin={(e) => this.signIn(e)}
             signup={(e) => this.signUp(e)}
+            errors={this.state.errors}
+            switch={this.switchSignUp}
           />
         </div>
       );

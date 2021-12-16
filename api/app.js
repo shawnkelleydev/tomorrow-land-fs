@@ -52,13 +52,13 @@ const authenticateUser = async (req, res, next) => {
         user.password
       );
       if (authenticated) {
-        console.log(`Authentication successful for ${user.emailAddress}`);
+        console.log(`Authentication successful.`);
         req.currentUser = user;
       } else {
-        message = `Authentication failure for ${user.emailAddress}`;
+        message = `Authentication failure.`;
       }
     } else {
-      message = `User not found for ${user.emailAddress}`;
+      message = `User not found.`;
     }
   } else {
     message = "Auth header not found";
@@ -92,7 +92,6 @@ app.get("/api/users", authenticateUser, async (req, res) => {
     res.status(200).json({ user });
   } catch (err) {
     console.error("Man down! ", err);
-    res.status(400);
   }
 });
 
