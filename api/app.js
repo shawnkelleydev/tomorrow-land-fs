@@ -178,6 +178,26 @@ app.post("/api/entry", authenticateUser, async (req, res) => {
   }
 });
 
+app.put("/api/entry", authenticateUser, async (req, res) => {
+  try {
+    const key = req.body.key;
+    const entry = await Entry.findOne({ where: { key } });
+    entry.set({
+      name: req.body.name,
+      amount: req.body.amount,
+    });
+    entry.save();
+    res.status(200).send();
+  } catch (err) {
+    console.error("Man down! ", err);
+    if (err.name.toLowerCase().includes("sequelize")) {
+      //return validation errors
+      const errors = err.errors.map((err) => err.message);
+      res.status(400).json({ errors });
+    }
+  }
+});
+
 app.delete("/api/entry", authenticateUser, async (req, res) => {
   try {
     const key = req.body.key;

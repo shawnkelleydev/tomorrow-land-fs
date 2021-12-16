@@ -148,7 +148,7 @@ class App extends React.Component {
 
   signOut() {
     localStorage.clear();
-    this.setState({ user: {}, password: "" });
+    this.setState({ user: {}, password: "", entries: [] });
   }
 
   /* ======
@@ -227,12 +227,6 @@ class App extends React.Component {
     DELETE
   
   ======== */
-
-  /* 
-  
-  
-
-  */
 
   async handleDelete(e) {
     const key = e.target.parentElement.parentElement.id;
@@ -358,27 +352,43 @@ class App extends React.Component {
   */
 
   handleEdit(e) {
-    console.log(e);
-    //seelct all the things
-    // const key = e.target.parentElement.parentElement.id;
-    // const li = document.getElementById(key);
-    // const form = li.querySelector("form");
-    // const labels = form.querySelectorAll("label");
-    // const data = li.querySelector(".data");
-    // const textInput = form.querySelector(".text");
-    // const amtInput = form.querySelector(".number");
-    // //hide / show
-    // hide(data);
-    // hideList(labels);
-    // show(form);
-    // //set preliminary input values
-    // textInput.value = data.querySelector(".item").innerText;
-    // amtInput.value = data.querySelector(".amt").innerText;
+    e.preventDefault();
+    //select all the things
+    const li = e.target.parentElement;
+    const key = li.id;
+    const form = li.querySelector("form");
+    const name = form.querySelector("#text-input").value;
+    let amt = form.querySelector("#amt-input").value;
+    amt = parseInt(amt);
+    let entries = this.state.entries;
+    let entry = entries.filter((entry) => entry.key === key)[0];
+    entry.name = name;
+    entry.amount = amt;
+    entries = entries.filter((entry) => entry.key !== key);
+    this.setState({ ...entries, entry });
+    //edit db
+    const url = entryUrl;
+
+    const body = {
+      key,
+      name,
+      amount: amt,
+    };
+    //current user
+    const auth = {
+      username: this.state.user.emailAddress,
+      password: this.state.password,
+    };
+
+    axios
+      .put(url, body, { auth })
+      .then((res) => console.log(res))
+      .catch((err) => console.error(err));
   }
 
   //swith sign in / sign up
   switchSignUp = () => {
-    this.setState({ signedUp: !this.state.signedUp });
+    this.setState({ signedUp: !this.state.signedUp, errors: null });
   };
 
   /* =======
@@ -463,29 +473,5 @@ class App extends React.Component {
     }
   }
 }
-
-/*
-
-show and hide functions for use above
-
-*/
-
-// function hide(element) {
-//   element.style.display = "none";
-// }
-
-// // function hideList(list) {
-// //   list.forEach((element) => (element.style.display = "none"));
-// // }
-
-// function show(element) {
-//   element.style.display = "flex";
-// }
-
-/* 
-
-App is exported for use in index.js
-
-*/
 
 export default App;

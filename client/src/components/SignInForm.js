@@ -1,18 +1,11 @@
+import Errors from "./Errors";
+
 const SignInForm = (props) => {
   const errors = props.errors;
   return (
     <div className="signin--div">
       <p className="signin--p">Welcome! Please signin to get started.</p>
-      {errors ? (
-        <div className="validation--div">
-          <h2>Error</h2>
-          <ul>
-            {errors.map((error, i) => (
-              <li key={i}>{error}</li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
+      {errors ? <Errors errors={errors} /> : null}
       <form className="signin--form" onSubmit={props.signin}>
         <label htmlFor="email" className="signin--label">
           email

@@ -1,0 +1,112 @@
+* 
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+
+$button: #9d00a3;
+$list-item: #4f005d;
+
+body 
+  background: #00022c;
+  color: white;
+
+ul 
+  list-style: none;
+
+.App 
+  padding: 10px;
+  min-height: 100vh;
+
+.App, header, .signin--div 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+header 
+  p, h1 
+    margin-bottom: 20px;
+
+.signin--input, .signin--submit 
+  margin-bottom: 20px;
+
+
+input, button 
+  height: 50px;
+
+input, button, .mid, .list-div
+  width: 100%;
+
+input, .name, .amt 
+  padding-left: 10px;
+
+footer 
+  text-align: center;
+
+.hide 
+  display: none;
+
+.show
+  display: block;
+
+.income, .outgo, .data, .bal-div, .edit 
+  display: -ms-grid;
+  display: grid;
+  grid-template-columns: auto 100px 50px;
+  align-items: center;
+
+.income label, .outgo label 
+  position: absolute;
+
+.income label span, .outgo label span 
+  position: relative;
+
+.income label span 
+  top: 40px;
+
+.outgo label span 
+  bottom: 40px;
+
+.bal-div 
+  margin: 30px 0;
+
+.mid, .signin--p 
+  margin: 20px 0;
+
+.negative 
+  color: red;
+
+.positive 
+  color: lime;
+
+.list-div li 
+  background: $list-item;
+
+button 
+  border: none;
+  color: white;
+  background: $button;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+
+.plus 
+  width: 20px;
+
+.signout, a 
+  color: #f700ff;
+
+.validation--div 
+  margin-bottom: 20px;
+
+  h2 
+    margin-bottom: 20px;  
+
+form, .list-div, .mid 
+  max-width: 320px;
+
+/*# sourceMappingURL=index.css.map */

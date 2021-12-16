@@ -10,7 +10,12 @@ const Input = (props) => {
     <form
       className={`${props.class} li--parent`}
       category={props.category}
-      onSubmit={props.submit}
+      onSubmit={(e) => {
+        props.submit(e);
+        if (props.type === "edit") {
+          props.switch();
+        }
+      }}
     >
       {/* <label htmlFor="text-input">
         <span>item</span>

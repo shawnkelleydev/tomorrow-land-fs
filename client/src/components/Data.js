@@ -7,11 +7,21 @@ to Tomorrow Land.
 
 const Data = (props) => {
   return (
-    <span className="data">
-      <span className="name" onClick={props.edit}>
+    <span className={props.class}>
+      <span
+        className="name"
+        onClick={() => {
+          props.switch();
+        }}
+      >
         {props.name}
       </span>
-      <span className="amt" onClick={props.edit}>
+      <span
+        className="amt"
+        onClick={() => {
+          props.switch();
+        }}
+      >
         {props.amt}
       </span>
       <button className="del-btn" onClick={props.del}>

@@ -6,19 +6,33 @@ Input.js, which will distinguish it from other utilizations of the same componen
 
 */
 
+import React, { useState } from "react";
+
 import Input from "./Input";
 import Data from "./Data";
 
 const New = (props) => {
+  const [edit, setEdit] = useState(false);
+
+  function switchEdit() {
+    setEdit(!edit);
+  }
+
   return (
     <li id={props.id} className="item">
       <Data
+        class={edit ? "hide" : "data"}
         name={props.name}
         amt={props.amt}
         del={props.del}
-        edit={props.edit}
+        switch={switchEdit}
       />
-      <Input class="edit" submit={props.submit} />
+      <Input
+        class={edit ? "edit" : "hide"}
+        submit={props.edit}
+        type="edit"
+        switch={switchEdit}
+      />
       {/* input hidden */}
     </li>
   );
