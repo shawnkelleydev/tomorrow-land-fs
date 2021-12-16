@@ -41,34 +41,36 @@ class App extends React.Component {
   componentDidMount() {
     const username = localStorage.getItem("username");
     const password = localStorage.getItem("password");
-    const url = userUrl;
-    const auth = {
-      username,
-      password,
-    };
-    this.setState({ password });
-    axios
-      .get(url, { auth })
-      .then((res) => {
-        this.setState({ user: res.data.user, errors: null });
-      })
-      .then((x) => {
-        const url = entryUrl;
-        const auth = {
-          username: this.state.user.emailAddress,
-          password: this.state.password,
-        };
-        axios
-          .get(url, { auth })
-          .then((res) => {
-            const entries = res.data.entry;
-            this.setState({ entries });
-          })
-          .then((e) => this.updateBalance());
-      })
-      .catch((err) =>
-        console.error("Invalid credentials in local storage. ", err)
-      );
+    if (username && password) {
+      const url = userUrl;
+      const auth = {
+        username,
+        password,
+      };
+      this.setState({ password });
+      axios
+        .get(url, { auth })
+        .then((res) => {
+          this.setState({ user: res.data.user, errors: null });
+        })
+        .then((x) => {
+          const url = entryUrl;
+          const auth = {
+            username: this.state.user.emailAddress,
+            password: this.state.password,
+          };
+          axios
+            .get(url, { auth })
+            .then((res) => {
+              const entries = res.data.entry;
+              this.setState({ entries });
+            })
+            .then((e) => this.updateBalance());
+        })
+        .catch((err) =>
+          console.error("Invalid credentials in local storage. ", err)
+        );
+    }
   }
 
   /* ===================
@@ -127,7 +129,21 @@ class App extends React.Component {
         localStorage.setItem("password", password);
         this.updateBalance();
       })
-      .catch((err) => this.setState({ errors: err.response.data.message }));
+      .then((x) => {
+        const url = entryUrl;
+        const auth = {
+          username: this.state.user.emailAddress,
+          password: this.state.password,
+        };
+        axios
+          .get(url, { auth })
+          .then((res) => {
+            const entries = res.data.entry;
+            this.setState({ entries });
+          })
+          .then((e) => this.updateBalance());
+      })
+      .catch((err) => this.setState({ errors: [err.response.data.message] }));
   }
 
   signOut() {
