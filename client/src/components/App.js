@@ -344,10 +344,7 @@ class App extends React.Component {
 
   /*
   
-  handleEdit(e) uses event data to hide spans and show input fields with
-  appropriate pre-set values.
-  
-  ! DISABLED !
+  NOTE - conditional rendering of edit fields handled in New.js
 
   */
 
@@ -356,34 +353,39 @@ class App extends React.Component {
     //select all the things
     const li = e.target.parentElement;
     const key = li.id;
+    //form
     const form = li.querySelector("form");
-    const name = form.querySelector("#text-input").value;
-    let amt = form.querySelector("#amt-input").value;
+    const nField = form.querySelector("#text-input");
+    const aField = form.querySelector("#amt-input");
+    //values
+    const name = nField.value;
+    let amt = aField.value;
     amt = parseInt(amt);
-    let entries = this.state.entries;
-    let entry = entries.filter((entry) => entry.key === key)[0];
-    entry.name = name;
-    entry.amount = amt;
-    entries = entries.filter((entry) => entry.key !== key);
-    this.setState({ ...entries, entry });
-    //edit db
-    const url = entryUrl;
+    if (!name || !amt) {
+      return;
+    } else {
+      let entries = this.state.entries;
+      let entry = entries.filter((entry) => entry.key === key)[0];
+      entry.name = name;
+      entry.amount = amt;
+      entries = entries.filter((entry) => entry.key !== key);
+      this.setState({ ...entries, entry });
+      //edit db
+      const url = entryUrl;
 
-    const body = {
-      key,
-      name,
-      amount: amt,
-    };
-    //current user
-    const auth = {
-      username: this.state.user.emailAddress,
-      password: this.state.password,
-    };
+      const body = {
+        key,
+        name,
+        amount: amt,
+      };
+      //current user
+      const auth = {
+        username: this.state.user.emailAddress,
+        password: this.state.password,
+      };
 
-    axios
-      .put(url, body, { auth })
-      .then((res) => console.log(res))
-      .catch((err) => console.error(err));
+      axios.put(url, body, { auth }).catch((err) => console.error(err));
+    }
   }
 
   //swith sign in / sign up
@@ -425,6 +427,7 @@ class App extends React.Component {
               change={(e) => this.handleIncomeInputChange(e)}
               itemVal={this.state.inItem}
               amtVal={this.state.inAmt}
+              type="initial"
             />
             {/* input is available to App.js and New.js for forthcoming editing features */}
           </div>
@@ -445,6 +448,7 @@ class App extends React.Component {
               change={(e) => this.handleOutgoInputChange(e)}
               itemVal={this.state.outItem}
               amtVal={this.state.outAmt}
+              type="initial"
             />
             <List
               list={this.state.entries}

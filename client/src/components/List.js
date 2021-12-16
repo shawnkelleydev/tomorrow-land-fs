@@ -11,7 +11,14 @@ import New from "./New.js";
 
 const List = (props) => {
   let list = props.list;
+  //alphabetize
+  list = list.sort((a, b) => {
+    let nameA = a.name.toLowerCase();
+    let nameB = b.name.toLowerCase();
+    return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
+  });
   if (list) {
+    //sort and return
     if (props.isIncome) {
       list = list.filter((entry) => entry.isIncome === true);
     } else {

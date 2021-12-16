@@ -32,6 +32,7 @@ const New = (props) => {
         submit={props.edit}
         type="edit"
         switch={switchEdit}
+        id={props.id}
       />
       {/* input hidden */}
     </li>
