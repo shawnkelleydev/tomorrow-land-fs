@@ -7,6 +7,7 @@ import List from "./List";
 import Input from "./Input";
 import SignIn from "./SignIn";
 
+//global api url references
 const entryUrl = "http://localhost:8080/api/entry";
 const userUrl = "http://localhost:8080/api/users";
 
@@ -20,12 +21,9 @@ class App extends React.Component {
   state = {
     entries: [],
     income: [],
+    totalIncome: null,
     outgo: [],
     balance: "0",
-    inItem: "",
-    inAmt: "",
-    outItem: "",
-    outAmt: "",
     user: {},
     password: "",
     errors: null,
@@ -191,12 +189,6 @@ class App extends React.Component {
     if (code === "out") {
       isIncome = false;
     }
-    //controlled component maintenance
-    if (isIncome) {
-      this.setState({ inItem: "", inAmt: "" });
-    } else {
-      this.setState({ outItem: "", outAmt: "" });
-    }
     let entries = [...prev, { name: item, amount: amt, key, isIncome }];
     //set state
     await this.setState({
@@ -269,6 +261,7 @@ class App extends React.Component {
     const inArr = [];
     income.forEach((entry) => inArr.push(parseInt(entry.amount)));
     income = inArr.reduce((total, entry) => total + entry, 0);
+    this.setState({ totalIncome: income });
     //get total outgo
     const outArr = [];
     outgo.forEach((entry) => outArr.push(parseInt(entry.amount)));
@@ -278,29 +271,14 @@ class App extends React.Component {
     this.setState({ balance });
     //change color
     const bal = document.querySelector(".bal");
-    if (balance < 0) {
-      bal.className = "bal negative";
-    } else if (balance > 0) {
-      bal.className = "bal positive";
-    } else {
-      bal.className = "bal";
-    }
-  }
-
-  //  automatically calculates tithe from income data
-  //  fired in outgo input controlled component functions below
-  checkTithe() {
-    const input = this.state.outItem;
-
-    if (input.toLowerCase().includes("tith")) {
-      let income = this.state.entries.filter((entry) => entry.isIncome);
-      const inArr = [];
-      income.forEach((entry) => inArr.push(parseInt(entry.amount)));
-      income = inArr.reduce((total, entry) => total + entry, 0);
-      const tithe = income * 0.1;
-      this.setState({ outAmt: tithe });
-    } else {
-      return;
+    if (bal) {
+      if (balance < 0) {
+        bal.className = "bal negative";
+      } else if (balance > 0) {
+        bal.className = "bal positive";
+      } else {
+        bal.className = "bal";
+      }
     }
   }
 
@@ -425,8 +403,6 @@ class App extends React.Component {
               class="income"
               submit={(e) => this.handleSubmit(e)}
               change={(e) => this.handleIncomeInputChange(e)}
-              itemVal={this.state.inItem}
-              amtVal={this.state.inAmt}
               type="initial"
             />
             {/* input is available to App.js and New.js for forthcoming editing features */}
@@ -446,9 +422,8 @@ class App extends React.Component {
               class="outgo"
               submit={(e) => this.handleSubmit(e)}
               change={(e) => this.handleOutgoInputChange(e)}
-              itemVal={this.state.outItem}
-              amtVal={this.state.outAmt}
               type="initial"
+              totalIncome={this.state.totalIncome}
             />
             <List
               list={this.state.entries}

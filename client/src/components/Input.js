@@ -21,12 +21,23 @@ class Input extends Component {
       let amt = li.querySelector(".amt");
       name = name.innerText;
       amt = amt.innerText;
-      console.log(name, amt);
       this.setState({ name, amt });
     }
   }
-  // const [name, setname] = useState("");
-  // const [amt, setamt] = useState("");
+
+  //  automatically calculates tithe from income data
+  //  fired in outgo input controlled component functions below
+  checkTithe() {
+    const input = this.state.name;
+    if (input.toLowerCase().includes("tith")) {
+      console.log("tithe!!");
+      const income = this.props.totalIncome;
+      const amt = income * 0.1;
+      this.setState({ amt });
+    } else {
+      return;
+    }
+  }
 
   render() {
     return (
@@ -41,6 +52,8 @@ class Input extends Component {
             let amt = e.target.querySelector(".input--number").value;
             this.setState({ name, amt });
             console.log(name, amt);
+          } else if (this.props.type === "initial") {
+            this.setState({ name: "", amt: "" });
           }
         }}
       >
@@ -48,14 +61,13 @@ class Input extends Component {
           type="text"
           id="text-input"
           className="input--name"
-          value={
-            this.props.type === "initial" ? this.props.itemVal : this.state.name
-          }
-          onChange={
-            this.props.type === "initial"
-              ? this.props.change
-              : (e) => this.setState({ name: e.target.value })
-          }
+          value={this.state.name}
+          onChange={(e) => {
+            this.setState({ name: e.target.value });
+            if (this.props.class === "outgo") {
+              this.checkTithe();
+            }
+          }}
           placeholder={this.props.type === "initial" ? "name" : null}
           // defaultValue={this.props.type === "edit" ? name : null}
         />
@@ -64,14 +76,8 @@ class Input extends Component {
           id="amt-input"
           type="number"
           className="input--number"
-          value={
-            this.props.type === "initial" ? this.props.amtVal : this.state.amt
-          }
-          onChange={
-            this.props.type === "initial"
-              ? this.props.change
-              : (e) => this.setState({ amt: e.target.value })
-          }
+          value={this.state.amt}
+          onChange={(e) => this.setState({ amt: e.target.value })}
           placeholder={this.props.type === "initial" ? "amount" : null}
         />
         <button type="submit" className="submit">
