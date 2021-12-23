@@ -38,3 +38,4 @@ bin-release/
 
 # db
 /api/tomorrowland.db
+*Db.*
