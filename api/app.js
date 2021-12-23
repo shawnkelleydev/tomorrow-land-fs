@@ -18,15 +18,6 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(cors());
 
-//sync db
-(async () => {
-  try {
-    await sequelize.sync();
-  } catch (err) {
-    console.error("Man down in Sync Function! ", err);
-  }
-})();
-
 // db connection tester
 (async function () {
   try {
@@ -34,6 +25,16 @@ app.use(cors());
     console.log("Connection to database successful!");
   } catch (err) {
     console.error("Man down! DB connection problem:", err);
+  }
+})();
+
+//sync db
+(async () => {
+  try {
+    await sequelize.sync();
+    console.log("sync successful!");
+  } catch (err) {
+    console.error("Man down in Sync Function! ", err);
   }
 })();
 
