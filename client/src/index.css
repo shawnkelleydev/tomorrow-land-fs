@@ -127,7 +127,7 @@ button {
   font-size: 1.2em;
 }
 
-.name, .amt, button {
+.name, .amt, button, .signout, .signup--link {
   cursor: pointer;
 }
 

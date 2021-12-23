@@ -1,5 +1,5 @@
 const Header = (props) => {
-  if (props.user.id) {
+  if (props.user) {
     return (
       <header className="App-header">
         <h1>Tomorrow Land</h1>

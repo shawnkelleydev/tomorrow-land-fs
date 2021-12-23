@@ -35,3 +35,6 @@ bin-release/
 *.air
 *.ipa
 *.apk
+
+# db
+/api/tomorrowland.db

@@ -30,9 +30,8 @@ class Input extends Component {
   checkTithe() {
     const input = this.state.name;
     if (input.toLowerCase().includes("tith")) {
-      console.log("tithe!!");
       const income = this.props.totalIncome;
-      const amt = income * 0.1;
+      const amt = (income * 0.1).toFixed(0);
       this.setState({ amt });
     } else {
       return;
@@ -51,7 +50,6 @@ class Input extends Component {
             let name = e.target.querySelector(".input--name").value;
             let amt = e.target.querySelector(".input--number").value;
             this.setState({ name, amt });
-            console.log(name, amt);
           } else if (this.props.type === "initial") {
             this.setState({ name: "", amt: "" });
           }

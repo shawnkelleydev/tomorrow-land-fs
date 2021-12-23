@@ -8,8 +8,9 @@ import Input from "./Input";
 import SignIn from "./SignIn";
 
 //global api url references
-const entryUrl = "http://localhost:8080/api/entry";
-const userUrl = "http://localhost:8080/api/users";
+const baseUrl = "http://localhost:8080/api";
+const entryUrl = baseUrl + "/entry";
+const userUrl = baseUrl + "/users";
 
 class App extends React.Component {
   /*
@@ -24,8 +25,8 @@ class App extends React.Component {
     totalIncome: null,
     outgo: [],
     balance: "0",
-    user: {},
-    password: "",
+    user: null,
+    password: null,
     errors: null,
     signedUp: true,
   };
@@ -40,35 +41,47 @@ class App extends React.Component {
     const username = localStorage.getItem("username");
     const password = localStorage.getItem("password");
     if (username && password) {
-      const url = userUrl;
       const auth = {
         username,
         password,
       };
       this.setState({ password });
+
       axios
-        .get(url, { auth })
+        .get(baseUrl)
         .then((res) => {
-          this.setState({ user: res.data.user, errors: null });
+          if (res.status === 200) {
+            this.getUser(auth);
+          }
         })
-        .then((x) => {
-          const url = entryUrl;
-          const auth = {
-            username: this.state.user.emailAddress,
-            password: this.state.password,
-          };
-          axios
-            .get(url, { auth })
-            .then((res) => {
-              const entries = res.data.entry;
-              this.setState({ entries });
-            })
-            .then((e) => this.updateBalance());
-        })
-        .catch((err) =>
-          console.error("Invalid credentials in local storage. ", err)
-        );
+        .catch((err) => console.error("man down! ", err));
     }
+  }
+
+  getUser(auth) {
+    axios
+      .get(userUrl, { auth })
+      .then((res) => {
+        this.setState({ user: res.data.user, errors: null });
+      })
+      .then((x) => {
+        const url = entryUrl;
+        const auth = {
+          username: this.state.user.emailAddress,
+          password: this.state.password,
+        };
+        axios
+          .get(url, { auth })
+          .then((res) => {
+            const entries = res.data.entry;
+            this.setState({ entries });
+          })
+          .then((e) => this.updateBalance());
+      })
+      .catch((err) => {
+        console.error("Invalid credentials in local storage. ", err);
+        this.setState({ password: null, user: null });
+      });
   }
 
   /* ===================
@@ -146,7 +159,7 @@ class App extends React.Component {
 
   signOut() {
     localStorage.clear();
-    this.setState({ user: {}, password: "", entries: [] });
+    this.setState({ user: null, password: null, entries: [] });
   }
 
   /* ======
@@ -254,7 +267,7 @@ class App extends React.Component {
   
   */
 
-  async updateBalance() {
+  updateBalance() {
     let income = this.state.entries.filter((entry) => entry.isIncome);
     let outgo = this.state.entries.filter((entry) => !entry.isIncome);
     //get total income
@@ -364,6 +377,7 @@ class App extends React.Component {
 
       axios.put(url, body, { auth }).catch((err) => console.error(err));
     }
+    this.updateBalance();
   }
 
   //swith sign in / sign up
@@ -386,7 +400,7 @@ class App extends React.Component {
   */
 
   render() {
-    if (this.state.user.id) {
+    if (this.state.user) {
       return (
         <div className="App">
           <Header user={this.state.user} signout={() => this.signOut()} />
@@ -402,7 +416,6 @@ class App extends React.Component {
             <Input
               class="income"
               submit={(e) => this.handleSubmit(e)}
-              change={(e) => this.handleIncomeInputChange(e)}
               type="initial"
             />
             {/* input is available to App.js and New.js for forthcoming editing features */}
@@ -421,7 +434,6 @@ class App extends React.Component {
             <Input
               class="outgo"
               submit={(e) => this.handleSubmit(e)}
-              change={(e) => this.handleOutgoInputChange(e)}
               type="initial"
               totalIncome={this.state.totalIncome}
             />

@@ -14,8 +14,21 @@ import Data from "./Data";
 const New = (props) => {
   const [edit, setEdit] = useState(false);
 
-  function switchEdit() {
+  function switchEdit(e) {
     setEdit(!edit);
+    if (!edit) {
+      const type = e.target.className;
+      const form = e.target.parentElement.parentElement.querySelector("form");
+      const nameField = form.querySelector(".input--name");
+      const amtField = form.querySelector(".input--number");
+      if (type === "name") {
+        console.log(nameField);
+        nameField.focus();
+      } else {
+        console.log(amtField);
+        amtField.focus();
+      }
+    }
   }
 
   return (
@@ -25,7 +38,7 @@ const New = (props) => {
         name={props.name}
         amt={props.amt}
         del={props.del}
-        switch={switchEdit}
+        switch={(e) => switchEdit(e)}
       />
       <Input
         class={edit ? "edit" : "hide"}

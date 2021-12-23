@@ -72,7 +72,7 @@ const authenticateUser = async (req, res, next) => {
   }
 };
 
-app.get("/", async (req, res) => {
+app.get("/api", async (req, res) => {
   try {
     res.send("Welcome to the Tomorrow Land API!");
   } catch (err) {
