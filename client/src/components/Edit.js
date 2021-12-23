@@ -1,45 +1,25 @@
-// for basic input fields (editing fields in Edit.js)
-
-import { useState } from "react";
-
-export default function Input(props) {
-  //controlls
-  const [name, setName] = useState("");
-  const [amount, setAmount] = useState("");
-
+export default function Edit(props) {
   return (
     <form
-      className={`${props.class} li--parent`}
+      className={`${props.class} edit li--parent`}
       onSubmit={(e) => {
         //handler in App.js
         props.submit(e);
-        //reset name / amount fields
-        setName("");
-        setAmount("");
-        //refocus on name field
-        e.target.querySelector(".input--name").focus();
+        props.switch();
       }}
     >
       <input
         type="text"
         id="text-input"
         className="input--name"
-        value={name}
-        onChange={(e) => {
-          setName(e.target.value);
-        }}
-        placeholder={props.type === "initial" ? "name" : ""}
+        defaultValue={props.name}
       />
 
       <input
         id="amt-input"
         type="number"
         className="input--number"
-        value={amount}
-        onChange={(e) => {
-          setAmount(e.target.value);
-        }}
-        placeholder={props.type === "initial" ? "amount" : ""}
+        defaultValue={props.amt}
       />
       <button type="submit" className="submit">
         <svg

@@ -1,34 +1,17 @@
-/*
-
-New.js recieves props from List.js and builds list items.  It passes necessary
-information to Data.js and Input.js, including important className data for
-Input.js, which will distinguish it from other utilizations of the same component.
-
-*/
-
+//dependencies
 import React, { useState } from "react";
 
-import Input from "./Input";
+//components
 import Data from "./Data";
+import Edit from "./Edit";
 
 const New = (props) => {
+  //edit mode state
   const [edit, setEdit] = useState(false);
 
+  //toggle edit
   function switchEdit(e) {
     setEdit(!edit);
-    if (!edit) {
-      const type = e.target.className;
-      const form = e.target.parentElement.parentElement.querySelector("form");
-      const nameField = form.querySelector(".input--name");
-      const amtField = form.querySelector(".input--number");
-      if (type === "name") {
-        console.log(nameField);
-        nameField.focus();
-      } else {
-        console.log(amtField);
-        amtField.focus();
-      }
-    }
   }
 
   return (
@@ -40,12 +23,14 @@ const New = (props) => {
         del={props.del}
         switch={(e) => switchEdit(e)}
       />
-      <Input
+      <Edit
         class={edit ? "edit" : "hide"}
         submit={props.edit}
         type="edit"
         switch={switchEdit}
         id={props.id}
+        name={props.name}
+        amt={props.amt}
       />
       {/* input hidden */}
     </li>

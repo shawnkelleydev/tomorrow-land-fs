@@ -8,7 +8,10 @@ import Input from "./Input";
 import SignIn from "./SignIn";
 
 //global api url references
+//live server
 const baseUrl = "https://tomorrowland-skd.herokuapp.com/api";
+//dev server
+// const baseUrl = "http://localhost:8080/api";
 const entryUrl = baseUrl + "/entry";
 const userUrl = baseUrl + "/users";
 
@@ -197,11 +200,11 @@ export default function App() {
     setEntries([]);
   }
 
-  /* ======
+  /* ================
   
-    SUBMIT
+    ITEM SUBMISSIONS
   
-  ======= */
+  ================= */
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -284,11 +287,11 @@ export default function App() {
     setEntries(updated);
   }
 
-  /* =====
+  /* =========
   
-    EDIT
+    EDITING
   
-  ===== */
+  ========= */
 
   /*
   
@@ -298,6 +301,7 @@ export default function App() {
 
   function handleEdit(e) {
     e.preventDefault();
+
     //select all the things
     const li = e.target.parentElement;
     const key = li.id;
@@ -316,8 +320,10 @@ export default function App() {
       let entry = currentEntries.filter((entry) => entry.key === key)[0];
       entry.name = name;
       entry.amount = amt;
+      //erase old
       currentEntries = currentEntries.filter((entry) => entry.key !== key);
-      setEntries(...entries, entry);
+      //add new
+      setEntries([...currentEntries, entry]);
       //edit db
       const url = entryUrl;
 
@@ -341,6 +347,12 @@ export default function App() {
     setSignedUp(!signedUp);
     setErrors(null);
   };
+
+  /* ==========
+  
+    RENDERINGS
+
+  ========== */
 
   if (user) {
     return (
