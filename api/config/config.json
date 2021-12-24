@@ -1,16 +1,16 @@
 {
   "development": {
-    "storage": "tomorrowland.db",
+    "storage": "data.db",
     "dialect": "sqlite",
     "logging": false
   },
   "test": {
-    "storage": "tomorrowland.db",
+    "storage": "data.db",
     "dialect": "sqlite",
     "logging": false
   },
   "production": {
-    "storage": "tomorrowland.db",
+    "storage": "data.db",
     "dialect": "sqlite",
     "logging": false
   }

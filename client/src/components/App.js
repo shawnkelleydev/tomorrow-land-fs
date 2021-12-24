@@ -8,10 +8,16 @@ import Input from "./Input";
 import SignIn from "./SignIn";
 
 //global api url references
+
 //live server
-const baseUrl = "https://tomorrowland-skd.herokuapp.com/api";
+
+// const baseUrl = "https://tomorrowland-skd.herokuapp.com/api";
+
 //dev server
-// const baseUrl = "http://localhost:8080/api";
+
+const baseUrl = "http://localhost:8080/api";
+
+//routes
 const entryUrl = baseUrl + "/entry";
 const userUrl = baseUrl + "/users";
 
@@ -213,8 +219,6 @@ export default function App() {
     let item = e.target[0].value;
     let amt = e.target[1].value;
     let key = (Math.random() * 1000000).toFixed(0);
-    // const prevIncome = income;
-    // const prevOutgo = outgo;
     //---------------------------
     //return on empty input
     if (item === "" || amt === "") {
@@ -227,9 +231,6 @@ export default function App() {
     } else if (e.target.className.includes("outgo")) {
       addNewItem(item, amt, key, "out");
       focusTarget.focus();
-      //edit---------------------
-    } else if (e.target.className.includes("edit")) {
-      //insert edit callbacks here
     }
   }
 
