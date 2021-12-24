@@ -1,117 +1,181 @@
 * 
-  margin: 0;
-  padding: 0;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  font-family: "Montserrat", sans-serif;
+  margin: 0
+  padding: 0
+  -webkit-box-sizing: border-box
+  box-sizing: border-box
+  font-family: "Montserrat", sans-serif
+  transition: all .3s ease
 
-$button: #9d00a3;
-$list-item: #4f005d;
+$button: #9d00a3
+$list-item: #4f005d
 
 body 
-  background: #00022c;
-  color: white;
+  background: #00022c
+  color: white
 
 ul 
-  list-style: none;
+  list-style: none
 
 .App 
-  padding: 10px;
-  min-height: 100vh;
+  padding: 10px
+  min-height: 100vh
 
-.App, header, .signin--div 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+header, .App, .signin--div
+  display: flex
+
+.App, .signin--div 
+  flex-direction: column
+  align-items: center
 
 header 
-  p, h1 
-    margin-bottom: 20px;
+  position: fixed
+  justify-content: space-between
+  align-items: center
+  bottom: 0
+  width: 100%
+  h1
+    padding: 5px
+
+.Ham
+  width: 70px
+  padding: 10px
+  li
+    position: relative
+    background: white
+    height: 5px
+    width: 100%
+  li:nth-child(2)
+    margin: 8px 0
+
+.X
+  li:first-child
+    transform: rotate(45deg)
+    top: 14px
+  li:nth-child(2)
+    background: transparent 
+  li:nth-child(3)
+    transform: rotate(-45deg)
+    bottom: 12px
 
 .signin--input, .signin--submit 
-  margin-bottom: 20px;
+  margin-bottom: 20px
 
 
 input, button 
-  height: 50px;
+  height: 50px
 
 input, button, .mid, .list-div
-  width: 100%;
+  width: 100%
 
 input, .name, .amt 
-  padding-left: 10px;
+  padding-left: 10px
 
 footer 
-  text-align: center;
-
+  text-align: center
 
 
 .income, .outgo, .data, .bal-div, .edit 
-  display: -ms-grid;
-  display: grid;
-  grid-template-columns: auto 100px 50px;
-  align-items: center;
+  display: grid
+  grid-template-columns: auto 100px 50px
+  align-items: center
 
 .income label, .outgo label 
-  position: absolute;
+  position: absolute
 
 .income label span, .outgo label span 
-  position: relative;
+  position: relative
 
 .income label span 
-  top: 40px;
+  top: 40px
 
 .outgo label span 
-  bottom: 40px;
+  bottom: 40px
 
 .bal-div 
-  margin: 30px 0;
+  margin: 30px 0
 
 .mid, .signin--p 
-  margin: 20px 0;
+  margin: 20px 0
 
 .negative 
-  color: red;
+  color: red
 
 .positive 
-  color: lime;
+  color: lime
 
 .list-div li 
-  background: $list-item;
+  background: $list-item
 
 button 
-  border: none;
-  color: white;
-  background: $button;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2em;
+  border: none
+  color: white
+  background: $button
+  display: -webkit-box
+  display: -ms-flexbox
+  display: flex
+  align-items: center
+  justify-content: center
+  font-size: 1.2em
 
 .name, .amt, button, .signout, .signup--link
-  cursor: pointer;
+  cursor: pointer
 
 .plus 
-  width: 20px;
+  width: 20px
 
 .signout, a 
-  color: #f700ff;
+  color: #f700ff
 
 .validation--div 
-  margin-bottom: 20px;
+  margin-bottom: 20px
+  display: flex
+  flex-direction: column
+  align-items: center
+  border: 1px solid red
+  padding: 10px
+  width: 100%
+  color: red
 
   h2 
-    margin-bottom: 20px;  
+    margin-bottom: 20px  
 
 form, .list-div, .mid 
-  max-width: 320px;
+  max-width: 320px
+
+.Welcome
+  display: flex
+  flex-direction: column
+  align-items: center
+  p
+    margin-bottom: 20px
+
+.Menu
+  position: absolute
+  bottom: 52px
+  right: 0
+  li
+    height: 50px
+    display: flex
+    align-items: center
+    background: #460053
+    color: white
+    width: 100vw
+    border-bottom: #d900ff 1px solid
+    padding-left: 10px
+
+.out-right
+  right: -1000px
+
+.welcome-message
+  margin: 20px
+  color: #d900ff
+
+// ---------------------
 
 .hide 
-  display: none;
+  display: none
 
 .show
-  display: block;
+  display: block
 
 /*# sourceMappingURL=index.css.map */

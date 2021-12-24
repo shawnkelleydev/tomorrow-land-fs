@@ -6,7 +6,12 @@ const SignUpForm = (props) => {
     <div className="signin--div">
       <p className="signin--p">Welcome! Please sign up to get started.</p>
       {errors ? <Errors errors={errors} /> : null}
-      <form className="signin--form" onSubmit={props.signup}>
+      <form
+        className="signin--form"
+        onSubmit={(e) => {
+          props.signup(e);
+        }}
+      >
         <label htmlFor="firstName" className="signin--label">
           first name
         </label>

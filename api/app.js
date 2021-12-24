@@ -134,6 +134,17 @@ app.post("/api/users", async (req, res) => {
   }
 });
 
+app.delete("/api/users", authenticateUser, async (req, res) => {
+  try {
+    let id = await req.currentUser.id;
+    User.destroy({ where: { id } });
+    res.status(204).send();
+  } catch (err) {
+    console.error("Man down! ", err);
+    res.status(400).send();
+  }
+});
+
 app.get("/api/entry", authenticateUser, async (req, res) => {
   try {
     let UserId = await req.currentUser.id;
@@ -206,6 +217,7 @@ app.delete("/api/entry", authenticateUser, async (req, res) => {
     res.status(204).send();
   } catch (err) {
     console.error("Man down! ", err);
+    res.status(400).send();
   }
 });
 

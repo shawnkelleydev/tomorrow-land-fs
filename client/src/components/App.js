@@ -6,6 +6,7 @@ import Header from "./Header";
 import List from "./List";
 import Input from "./Input";
 import SignIn from "./SignIn";
+import Welcome from "./Welcome";
 
 //global api url references
 
@@ -32,11 +33,11 @@ export default function App() {
   const [signedUp, setSignedUp] = useState(true);
   const [serverStatus, setServerStatus] = useState(null);
 
-  /* ===================
+  /* ==============
 
     GET CREDS
   
-  =================== */
+  ============== */
 
   //wake up heroku dyno
   useEffect(() => {
@@ -166,6 +167,8 @@ export default function App() {
           setUser(res.data.user);
           setPassword(password);
           setErrors(null);
+          //switch sign/signin back to signin
+          switchSignUp();
         });
       })
       .catch((err) => {
@@ -349,6 +352,15 @@ export default function App() {
     setErrors(null);
   };
 
+  //delete account
+  const deleteAccount = () => {
+    const auth = { username: user.emailAddress, password };
+    axios
+      .delete(userUrl, { auth })
+      .catch((err) => console.error("User not deleted: ", err));
+    signOut();
+  };
+
   /* ==========
   
     RENDERINGS
@@ -358,7 +370,12 @@ export default function App() {
   if (user) {
     return (
       <div className="App">
-        <Header user={user} signout={() => signOut()} />
+        <Header
+          user={user}
+          signout={() => signOut()}
+          deleteAccount={() => deleteAccount()}
+        />
+        <Welcome user={user} signout={() => signOut()} />
         <div className="list-div">
           {/* <List /> assembles LI based on user input */}
           <List
