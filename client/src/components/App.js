@@ -11,11 +11,11 @@ import SignIn from "./SignIn";
 
 //live server
 
-// const baseUrl = "https://tomorrowland-skd.herokuapp.com/api";
+const baseUrl = "https://tomorrowland-skd.herokuapp.com/api";
 
 //dev server
 
-const baseUrl = "http://localhost:8080/api";
+// const baseUrl = "http://localhost:8080/api";
 
 //routes
 const entryUrl = baseUrl + "/entry";
