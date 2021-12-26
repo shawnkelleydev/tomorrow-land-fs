@@ -1,6 +1,6 @@
 # Tomorrow Land
 
-Welcome to TomorrowLand, a full-stack budgeting application!
+Welcome to Tomorrow Land, a full-stack budgeting application!
 
 This project is actively under construction, so tread carefully.
 
