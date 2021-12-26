@@ -12,11 +12,11 @@ import Welcome from "./Welcome";
 
 //live server
 
-// const baseUrl = "https://tomorrowland-skd.herokuapp.com/api";
+const baseUrl = "https://tomorrowland-skd.herokuapp.com/api";
 
 //dev server
 
-const baseUrl = "http://localhost:8080/api";
+// const baseUrl = "http://localhost:8080/api";
 
 //routes
 const entryUrl = baseUrl + "/entry";
@@ -274,7 +274,8 @@ export default function App() {
   ======== */
 
   async function handleDelete(e) {
-    const key = e.target.parentElement.parentElement.id;
+    const key = e.target.getAttribute("data");
+    console.log("fire");
     deleteFromDB(key);
     deleteFromState(key);
   }
@@ -308,43 +309,48 @@ export default function App() {
 
   function handleEdit(e) {
     e.preventDefault();
-
     //select all the things
-    const li = e.target.parentElement;
-    const key = li.id;
+    const key = e.target.getAttribute("data");
+    const li = document.querySelector(`#${key}`);
+    console.log(li);
     //form
-    const form = li.querySelector("form");
-    const nField = form.querySelector("#text-input");
-    const aField = form.querySelector("#amt-input");
-    //values
-    const name = nField.value;
-    let amt = aField.value;
-    amt = parseInt(amt);
-    if (!name || !amt) {
+    var form = li.querySelector(`.${e.target.className}`);
+    const field = form.querySelector("input");
+    //field value
+    let value = field.value;
+    //form classname for use below
+    form = form.className;
+    //operations
+    if (!value) {
       return;
     } else {
       let currentEntries = entries;
+      //get entry
       let entry = currentEntries.filter((entry) => entry.key === key)[0];
-      entry.name = name;
-      entry.amount = amt;
+      //create new edited version
+      if (form === "js-edit-name") {
+        entry.name = value;
+      } else if (form === "js-edit-amount") {
+        entry.amount = value;
+      }
       //erase old
       currentEntries = currentEntries.filter((entry) => entry.key !== key);
       //add new
       setEntries([...currentEntries, entry]);
       //edit db
       const url = entryUrl;
-
+      //conditional body for db
       const body = {
         key,
-        name,
-        amount: amt,
+        name: form === "js-edit-name" ? value : entry.name,
+        amount: form === "js-edit-amount" ? value : entry.amount,
       };
       //current user
       const auth = {
         username: user.emailAddress,
         password: password,
       };
-
+      //put request
       axios.put(url, body, { auth }).catch((err) => console.error(err));
     }
   }
@@ -383,13 +389,13 @@ export default function App() {
           {/* <List /> assembles LI based on user input */}
           <List
             list={entries}
-            del={(e) => handleDelete(e)}
+            delete={(e) => handleDelete(e)}
             edit={(e) => handleEdit(e)}
             submit={(e) => handleSubmit(e)}
             isIncome={true}
           />
           <Input
-            class="income"
+            class="income grid"
             submit={(e) => handleSubmit(e)}
             type="initial"
           />
@@ -398,7 +404,7 @@ export default function App() {
         <div className="mid">
           {/* Balance will update based on user input */}
           <h2>income</h2>
-          <div className="bal-div">
+          <div className="bal-div grid">
             <h2>Balance</h2>
             <h2 className="bal">$ {balance}</h2>
           </div>
@@ -407,14 +413,14 @@ export default function App() {
         <div className="list-div">
           {/* input is available to App.js and New.js for forthcoming editing features */}
           <Input
-            class="outgo"
+            class="outgo grid"
             submit={(e) => handleSubmit(e)}
             type="initial"
             totalIncome={totalIncome}
           />
           <List
             list={entries}
-            del={(e) => handleDelete(e)}
+            delete={(e) => handleDelete(e)}
             edit={(e) => handleEdit(e)}
             submit={(e) => handleSubmit(e)}
             isIncome={false}

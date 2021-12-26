@@ -1,20 +1,22 @@
 //dependencies
-import { useState } from "react";
+// import { useState } from "react";
 
 //components
 import New from "./New.js";
 
 const List = (props) => {
   //editing state
-  const [currentEditId, setCurrentEditId] = useState(null);
   //list
   let list = props.list;
+
+  // !! something about the sort seems to be causing bugs -- turned off for now
+
   //alphabetize
-  list = list.sort((a, b) => {
-    let nameA = a.name.toLowerCase();
-    let nameB = b.name.toLowerCase();
-    return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
-  });
+  // list = list.sort((a, b) => {
+  //   let nameA = a.name.toLowerCase();
+  //   let nameB = b.name.toLowerCase();
+  //   return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
+  // });
   if (list) {
     //sort and return
     if (props.isIncome) {
@@ -33,12 +35,10 @@ const List = (props) => {
             // confusing with entry.key / key
             //entry.key refers to the entrie's unique, encoded id
             key={i}
-            del={props.del}
+            delete={props.delete}
             edit={props.edit}
             submit={props.submit}
             entries={props.entries}
-            currentEditId={currentEditId}
-            setCurrentEditId={setCurrentEditId}
           />
         ))}
       </ul>

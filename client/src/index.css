@@ -92,7 +92,7 @@ header h1 {
   margin-bottom: 20px;
 }
 
-input, button {
+input, button, .item {
   height: 50px;
 }
 
@@ -100,7 +100,7 @@ input, button, .mid, .list-div {
   width: 100%;
 }
 
-input, .name, .amt {
+input {
   padding-left: 10px;
 }
 
@@ -108,11 +108,27 @@ footer {
   text-align: center;
 }
 
-.income, .outgo, .data, .bal-div, .edit {
+.name, .amount {
+  height: 100%;
+}
+
+.name-span, .amount-span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+  width: 100%;
+  padding-left: 10px;
+}
+
+.grid {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: auto 100px 50px;
-      grid-template-columns: auto 100px 50px;
+  -ms-grid-columns: auto 100px 44px;
+      grid-template-columns: auto 100px 44px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -150,10 +166,6 @@ footer {
   color: lime;
 }
 
-.list-div li {
-  background: #4f005d;
-}
-
 button {
   border: none;
   color: white;
@@ -170,7 +182,7 @@ button {
   font-size: 1.2em;
 }
 
-.name, .amt, button, .signout, .signup--link {
+.name, .amount, button, .signout, .signup--link {
   cursor: pointer;
 }
 

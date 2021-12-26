@@ -62,23 +62,31 @@ header
 .signin--input, .signin--submit 
   margin-bottom: 20px
 
-
-input, button 
+input, button, .item 
   height: 50px
 
 input, button, .mid, .list-div
   width: 100%
 
-input, .name, .amt 
+input 
   padding-left: 10px
 
 footer 
   text-align: center
 
+.name, .amount
+  height: 100%
 
-.income, .outgo, .data, .bal-div, .edit 
+.name-span, .amount-span
+  display: flex
+  align-items: center
+  height: 100%
+  width: 100%
+  padding-left: 10px
+
+.grid 
   display: grid
-  grid-template-columns: auto 100px 50px
+  grid-template-columns: auto 100px 44px
   align-items: center
 
 .income label, .outgo label 
@@ -105,9 +113,6 @@ footer
 .positive 
   color: lime
 
-.list-div li 
-  background: $list-item
-
 button 
   border: none
   color: white
@@ -119,7 +124,7 @@ button
   justify-content: center
   font-size: 1.2em
 
-.name, .amt, button, .signout, .signup--link
+.name, .amount, button, .signout, .signup--link
   cursor: pointer
 
 .plus 
