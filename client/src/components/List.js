@@ -1,15 +1,13 @@
-/*
+//dependencies
+import { useState } from "react";
 
-List is responsible for tranforming current income and outgo
-state in App.js into html on the page.  It receives all
-necessary data via props passed from App.js and passes that data
-as needed to child components.
-
-*/
-
+//components
 import New from "./New.js";
 
 const List = (props) => {
+  //editing state
+  const [currentEditId, setCurrentEditId] = useState(null);
+  //list
   let list = props.list;
   //alphabetize
   list = list.sort((a, b) => {
@@ -24,6 +22,7 @@ const List = (props) => {
     } else {
       list = list.filter((entry) => entry.isIncome === false);
     }
+
     return (
       <ul>
         {list.map((entry, i) => (
@@ -31,10 +30,15 @@ const List = (props) => {
             name={entry.name}
             amt={entry.amount}
             id={entry.key}
+            // confusing with entry.key / key
+            //entry.key refers to the entrie's unique, encoded id
             key={i}
             del={props.del}
             edit={props.edit}
             submit={props.submit}
+            entries={props.entries}
+            currentEditId={currentEditId}
+            setCurrentEditId={setCurrentEditId}
           />
         ))}
       </ul>

@@ -1,11 +1,27 @@
+import { useEffect, useRef } from "react";
+
 export default function Edit(props) {
+  const nameInput = useRef(null);
+  const amtInput = useRef(null);
+
+  useEffect(() => {
+    if (props.class === "edit" && props.target === "name") {
+      nameInput.current.focus();
+    } else if (props.class === "edit" && props.target === "amt") {
+      amtInput.current.focus();
+    }
+  }, [props.class, props.target]);
+
   return (
     <form
       className={`${props.class} edit li--parent`}
       onSubmit={(e) => {
         //handler in App.js
         props.submit(e);
-        props.switch();
+        props.switch(e);
+      }}
+      onBlur={(e) => {
+        props.blur(e);
       }}
     >
       <input
@@ -13,6 +29,7 @@ export default function Edit(props) {
         id="text-input"
         className="input--name"
         defaultValue={props.name}
+        ref={nameInput}
       />
 
       <input
@@ -20,6 +37,7 @@ export default function Edit(props) {
         type="number"
         className="input--number"
         defaultValue={props.amt}
+        ref={amtInput}
       />
       <button type="submit" className="submit">
         <svg

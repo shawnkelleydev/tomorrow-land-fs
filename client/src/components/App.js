@@ -12,11 +12,11 @@ import Welcome from "./Welcome";
 
 //live server
 
-const baseUrl = "https://tomorrowland-skd.herokuapp.com/api";
+// const baseUrl = "https://tomorrowland-skd.herokuapp.com/api";
 
 //dev server
 
-// const baseUrl = "http://localhost:8080/api";
+const baseUrl = "http://localhost:8080/api";
 
 //routes
 const entryUrl = baseUrl + "/entry";
@@ -244,8 +244,11 @@ export default function App() {
     if (code === "out") {
       isIncome = false;
     }
+    let name = item;
+    let amount = parseInt(amt);
+    console.log(name, amount);
     //set state
-    setEntries([...prev, { name: item, amount: amt, key, isIncome }]);
+    setEntries([...prev, { name, amount, key, isIncome }]);
 
     //send to db
     const url = entryUrl;
