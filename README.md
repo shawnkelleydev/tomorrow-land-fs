@@ -8,6 +8,6 @@ Also, because TomorrowLand is currently using SQLite3, it is advised to clone th
 
 To successfully use your local host, simply go to client/src/components/App.js and switch out the url (comment out the Heroku url and expose the localhost url).
 
-Both api and client will start by running "npm start" in the command line.
+To launch the project, run "npm start" in both the api and client directories.
 
 This project uses a React front end and Node/Express/Sequelize backend.
