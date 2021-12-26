@@ -246,7 +246,6 @@ export default function App() {
     }
     let name = item;
     let amount = parseInt(amt);
-    console.log(name, amount);
     //set state
     setEntries([...prev, { name, amount, key, isIncome }]);
 
@@ -275,7 +274,6 @@ export default function App() {
 
   async function handleDelete(e) {
     const key = e.target.getAttribute("data");
-    console.log("fire");
     deleteFromDB(key);
     deleteFromState(key);
   }
@@ -312,7 +310,6 @@ export default function App() {
     //select all the things
     const key = e.target.getAttribute("data");
     const li = document.querySelector(`#${key}`);
-    console.log(li);
     //form
     var form = li.querySelector(`.${e.target.className}`);
     const field = form.querySelector("input");
