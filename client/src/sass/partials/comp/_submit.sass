@@ -48,10 +48,11 @@
       z-index: -1
       background: complement(var.$color)
       transition: all .3s ease-out
-    &:hover 
-      color: black
-      &::before 
-        width: 100%
+    @media screen and (min-width: var.$break-dt)
+      &:hover 
+        color: black
+        &::before 
+          width: 100%
   legend
     color: #f3e17a
     width: 100%

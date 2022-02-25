@@ -108,11 +108,13 @@ button, select {
   background: #9eff88;
   transition: all 0.3s ease-out;
 }
-.Submit button:hover {
-  color: black;
-}
-.Submit button:hover::before {
-  width: 100%;
+@media screen and (min-width: 1025px) {
+  .Submit button:hover {
+    color: black;
+  }
+  .Submit button:hover::before {
+    width: 100%;
+  }
 }
 .Submit legend {
   color: #f3e17a;
