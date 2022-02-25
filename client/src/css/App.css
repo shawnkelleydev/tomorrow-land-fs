@@ -211,6 +211,9 @@ button, select {
   width: 100%;
   color: white;
 }
+.Item .Submit button:hover {
+  color: black;
+}
 
 .cat-1 {
   border-left: 1px solid lime;
