@@ -75,6 +75,7 @@ button, select {
 .Submit input, .Submit select {
   width: 100%;
   height: 44px;
+  border: 1px solid gray;
 }
 .Submit input {
   padding-left: 4px;
