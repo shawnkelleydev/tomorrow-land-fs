@@ -16,7 +16,7 @@ export default function Item(props) {
   }, [props]);
 
   useEffect(() => {
-    window.addEventListener("click", (e) => {
+    const cb = (e) => {
       const tag = e.target.tagName.toLowerCase();
       if (
         tag !== "input" &&
@@ -30,7 +30,10 @@ export default function Item(props) {
       ) {
         setEditing(false);
       }
-    });
+    };
+    window.addEventListener("click", cb);
+    // cleanup
+    return () => window.removeEventListener("click", cb);
   }, []);
 
   function del() {
