@@ -15,6 +15,24 @@ export default function Item(props) {
     setId(props.item.n);
   }, [props]);
 
+  useEffect(() => {
+    window.addEventListener("click", (e) => {
+      const tag = e.target.tagName.toLowerCase();
+      if (
+        tag !== "input" &&
+        tag !== "label" &&
+        tag !== "form" &&
+        tag !== "legend" &&
+        tag !== "button" &&
+        tag !== "select" &&
+        tag !== "option" &&
+        tag !== "span"
+      ) {
+        setEditing(false);
+      }
+    });
+  }, []);
+
   function del() {
     let t = searchParams.get("t");
     t = t

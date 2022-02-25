@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 export default function Submit(props) {
-  // controls
+  // controls -- conditionally set based on props for reusability as an editing tool
   const [text, setText] = useState(props.name ? props.name : "");
   const [amt, setAmt] = useState(props.amt ? props.amt.toString() : "");
   const [cat, setCat] = useState(props.cat ? props.cat.toString() : "1");
@@ -67,6 +67,7 @@ export default function Submit(props) {
   ];
 
   return (
+    // presence of props.stamp tells form whether to run add or edit for component reusability
     <form onSubmit={(e) => (props.stamp ? edit(e) : add(e))} className="Submit">
       {inputs.map((item, i) => (
         <label key={i} htmlFor={item.id}>
