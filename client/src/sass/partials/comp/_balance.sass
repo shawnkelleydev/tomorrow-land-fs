@@ -6,5 +6,9 @@
     justify-content: space-between
   .lime 
     color: lime
+    @media screen and (prefers-color-scheme: light)
+      color: green
   .red
     color: #ff5757
+    @media screen and (prefers-color-scheme: light)
+      color: darken(red, 10%)

@@ -19,6 +19,11 @@
 .App h1, .App h2 {
   color: #e988ff;
 }
+@media screen and (prefers-color-scheme: light) {
+  .App h1, .App h2 {
+    color: #450055;
+  }
+}
 .App > div {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -39,6 +44,12 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+@media screen and (prefers-color-scheme: light) {
+  body {
+    background: white;
+    color: black;
+  }
 }
 
 button, select {
@@ -123,6 +134,11 @@ button, select {
   position: absolute;
   bottom: -24px;
 }
+@media screen and (prefers-color-scheme: light) {
+  .Submit legend {
+    color: #cc0000;
+  }
+}
 
 .List {
   padding: 0;
@@ -141,8 +157,18 @@ button, select {
 .Balance .lime {
   color: lime;
 }
+@media screen and (prefers-color-scheme: light) {
+  .Balance .lime {
+    color: green;
+  }
+}
 .Balance .red {
   color: #ff5757;
+}
+@media screen and (prefers-color-scheme: light) {
+  .Balance .red {
+    color: #cc0000;
+  }
 }
 
 .Item {
@@ -158,6 +184,11 @@ button, select {
   background: none;
   color: white;
   border: 0;
+}
+@media screen and (prefers-color-scheme: light) {
+  .Item button {
+    color: black;
+  }
 }
 .Item > span {
   display: flex;
@@ -177,18 +208,34 @@ button, select {
 }
 .Item .Submit button {
   width: 100%;
+  color: white;
 }
 
 .cat-1 {
   border-left: 1px solid lime;
 }
+@media screen and (prefers-color-scheme: light) {
+  .cat-1 {
+    border-left: 1px solid #00cc00;
+  }
+}
 
 .cat-2 {
   border-left: 1px solid aqua;
 }
+@media screen and (prefers-color-scheme: light) {
+  .cat-2 {
+    border-left: 1px solid #00cccc;
+  }
+}
 
 .cat-3 {
   border-left: 1px solid yellow;
+}
+@media screen and (prefers-color-scheme: light) {
+  .cat-3 {
+    border-left: 1px solid #cccc00;
+  }
 }
 
 .cat-4 {
@@ -201,6 +248,11 @@ button, select {
 
 .cat-6 {
   border-left: 1px solid lightGreen;
+}
+@media screen and (prefers-color-scheme: light) {
+  .cat-6 {
+    border-left: 1px solid green;
+  }
 }
 
 .cat-7 {

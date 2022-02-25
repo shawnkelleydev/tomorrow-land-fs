@@ -11,6 +11,9 @@ body
   background: #101010
   color: white
   @include mixins.flex-col
+  @media screen and (prefers-color-scheme: light)
+    background: white
+    color: black
 
 button, select
   cursor: pointer
