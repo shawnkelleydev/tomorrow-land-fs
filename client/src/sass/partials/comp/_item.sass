@@ -1,0 +1,40 @@
+@use '../util/_var'
+@use '../util/_mixins'
+
+.Item
+  width: 100%
+  min-height: 44px
+  border-bottom: 1px dotted gray
+  display: grid
+  grid-template-columns: auto 90px
+  button
+    height: 44px
+    width: 44px
+    background: none
+    color: white
+    border: 0
+  > span
+    @include mixins.flex-row 
+    padding: 0 8px
+  div
+    padding-left: 4px
+    @include mixins.flex-row
+      justify-content: space-between
+.cat-1
+  border-left: 1px solid lime
+.cat-2
+  border-left: 1px solid aqua
+.cat-3
+  border-left: 1px solid yellow
+.cat-4
+  border-left: 1px solid blue
+.cat-5
+  border-left: 1px solid orange
+.cat-6
+  border-left: 1px solid lightGreen
+.cat-7
+  border-left: 1px solid red
+.cat-8
+  border-left: 1px solid purple
+.cat-9 
+  border-left: 1px solid lightGray

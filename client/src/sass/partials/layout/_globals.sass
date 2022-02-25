@@ -1,0 +1,16 @@
+@use '../util/_var'
+@use '../util/_mixins'
+
+*
+  box-sizing: border-box
+  margin: 0
+  padding: 0
+  font-family: 'Poppins', sans-serif
+
+body
+  background: #101010
+  color: white
+  @include mixins.flex-col
+
+button, select
+  cursor: pointer
