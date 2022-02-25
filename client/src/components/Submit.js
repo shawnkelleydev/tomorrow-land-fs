@@ -1,11 +1,11 @@
 import { useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-export default function Submit() {
+export default function Submit(props) {
   // controls
-  const [text, setText] = useState("");
-  const [amt, setAmt] = useState("");
-  const [cat, setCat] = useState("1");
+  const [text, setText] = useState(props.name ? props.name : "");
+  const [amt, setAmt] = useState(props.amt ? props.amt.toString() : "");
+  const [cat, setCat] = useState(props.cat ? props.cat.toString() : "1");
   const [warning, setWarning] = useState(false);
 
   const inputRef = useRef(null);
@@ -29,10 +29,25 @@ export default function Submit() {
     }
   }
 
-  const inputs = [
-    { id: "name", type: "text" },
-    { id: "amount", type: "number" },
-  ];
+  function edit(e) {
+    e.preventDefault();
+    let stamp = props.stamp;
+    let t = searchParams.get("t");
+    t = t
+      .split("_")
+      .filter((str) => !str.includes(stamp))
+      .map((item) => item + "_")
+      .reduce((str, item) => str + item);
+    let str = `${cat}-${stamp}-${text}-${amt}_`;
+    str += t;
+    if (text.match(/[a-zA-Z0-9]/g) && amt.match(/[0-9]/g)) {
+      setSearchParams(`t=${str}`);
+      props.setEditing(false);
+      setWarning(false);
+    } else {
+      setWarning(true);
+    }
+  }
 
   const cats = [
     "income",
@@ -46,8 +61,13 @@ export default function Submit() {
     "miscellaneous",
   ];
 
+  const inputs = [
+    { id: "name", type: "text" },
+    { id: "amount", type: "number" },
+  ];
+
   return (
-    <form onSubmit={(e) => add(e)} className="Submit">
+    <form onSubmit={(e) => (props.stamp ? edit(e) : add(e))} className="Submit">
       {inputs.map((item, i) => (
         <label key={i} htmlFor={item.id}>
           {item.id}
@@ -65,7 +85,11 @@ export default function Submit() {
         </label>
       ))}
       <label htmlFor="category">
-        <select id="category" onChange={(e) => setCat(e.target.value)}>
+        <select
+          id="category"
+          value={cat}
+          onChange={(e) => setCat(e.target.value)}
+        >
           {cats.map((cat, i) => (
             <option key={i} value={i + 1}>
               {cat}

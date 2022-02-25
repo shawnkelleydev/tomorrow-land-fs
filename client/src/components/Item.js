@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
+import Submit from "./Submit";
+
 export default function Item(props) {
   // { cat, n, name, amt }
 
   const [id, setId] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const [editing, setEditing] = useState(false);
 
   useEffect(() => {
     setId(props.item.n);
@@ -26,11 +30,23 @@ export default function Item(props) {
 
   return (
     <li className={`Item cat-${props.item.cat}`}>
-      <span>{props.item.name}</span>
-      <div>
-        <span>{props.item.amt}</span>
-        <button onClick={() => del()}>x</button>
-      </div>
+      {editing ? (
+        <Submit
+          stamp={id}
+          name={props.item.name}
+          amt={props.item.amt}
+          cat={props.item.cat}
+          setEditing={setEditing}
+        />
+      ) : (
+        <>
+          <span onClick={() => setEditing(true)}>{props.item.name}</span>
+          <div>
+            <span onClick={() => setEditing(true)}>{props.item.amt}</span>
+            <button onClick={() => del()}>x</button>
+          </div>
+        </>
+      )}
     </li>
   );
 }
