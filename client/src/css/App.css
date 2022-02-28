@@ -39,7 +39,7 @@
 }
 
 body {
-  background: #101010;
+  background: black;
   color: white;
   display: flex;
   flex-direction: column;
