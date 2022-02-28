@@ -33,13 +33,18 @@ export default function Submit(props) {
     e.preventDefault();
     let stamp = props.stamp;
     let t = searchParams.get("t");
-    t = t
-      .split("_")
-      .filter((str) => !str.includes(stamp))
-      .map((item) => item + "_")
-      .reduce((str, item) => str + item);
+    if (t && t.match(/[a-zA-Z0-9]/g)) {
+      t = t
+        .split("_")
+        .filter((str) => !str.includes(stamp))
+        .filter((item) => item !== "")
+        .map((item) => item + "_");
+      t = t.length > 0 ? t.reduce((str, item) => str + item) : null;
+    } else {
+      t = null;
+    }
     let str = `${cat}-${stamp}-${text}-${amt}_`;
-    str += t;
+    str = t ? str + t : str;
     if (text.match(/[a-zA-Z0-9]/g) && amt.match(/[0-9]/g)) {
       setSearchParams(`t=${str}`);
       props.setEditing(false);

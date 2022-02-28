@@ -15,17 +15,20 @@ export default function App() {
 
   useEffect(() => {
     let str = localStorage.getItem("t");
-    if (str) {
+    if (str && str.match(/[a-zA-Z0-9]/g)) {
       setSearchParams(`t=${str}`);
+    } else {
+      setSearchParams("");
     }
   }, [setSearchParams]);
 
   useEffect(() => {
     let t = searchParams.get("t");
-    localStorage.setItem("t", t);
-    if (!t) {
+    if (!t || !t.match(/[a-zA-Z0-9]/g)) {
       setList([]);
+      localStorage.removeItem("t");
     } else {
+      localStorage.setItem("t", t);
       t = t.split("_").filter((item) => item !== "");
       let arr = [];
       t.forEach((str) => {
