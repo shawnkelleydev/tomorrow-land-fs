@@ -14,7 +14,6 @@ export default function App() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    console.log(searchParams.get("t"));
     if (!searchParams.get("t")) {
       let str = localStorage.getItem("t");
       if (str && str.match(/[a-zA-Z0-9]/g)) {
