@@ -57,12 +57,14 @@ export default function Submit(props) {
   const cats = [
     "income",
     "giving",
-    "housing",
+    "debt",
+    "taxes",
+    "insurance",
+    "saving",
+    "investing",
     "utilities",
     "food",
     "transportation",
-    "debt",
-    "investing",
     "miscellaneous",
   ];
 

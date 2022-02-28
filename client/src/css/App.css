@@ -226,59 +226,78 @@ button, select {
 }
 
 .cat-1 {
-  border-left: 1px solid lime;
+  border-left: 2px solid lime;
 }
 @media screen and (prefers-color-scheme: light) {
   .cat-1 {
-    border-left: 1px solid #00cc00;
+    border-left: 2px solid #00cc00;
   }
 }
 
 .cat-2 {
-  border-left: 1px solid aqua;
+  border-left: 2px solid aqua;
 }
 @media screen and (prefers-color-scheme: light) {
   .cat-2 {
-    border-left: 1px solid #00cccc;
+    border-left: 2px solid #00cccc;
   }
 }
 
 .cat-3 {
-  border-left: 1px solid yellow;
+  border-left: 2px solid deepPink;
 }
 @media screen and (prefers-color-scheme: light) {
   .cat-3 {
-    border-left: 1px solid #cccc00;
+    border-left: 2px solid #e00079;
   }
 }
 
 .cat-4 {
-  border-left: 1px solid blue;
+  border-left: 2px solid blue;
 }
 
 .cat-5 {
-  border-left: 1px solid orange;
+  border-left: 2px solid orange;
 }
 
-.cat-6 {
-  border-left: 1px solid lightGreen;
+.cat-6, .cat-7 {
+  border-left: 2px solid lime;
 }
 @media screen and (prefers-color-scheme: light) {
-  .cat-6 {
-    border-left: 1px solid green;
+  .cat-6, .cat-7 {
+    border-left: 2px solid #00cc00;
   }
 }
 
-.cat-7 {
-  border-left: 1px solid red;
-}
-
 .cat-8 {
-  border-left: 1px solid purple;
+  border-left: 2px solid crimson;
+}
+@media screen and (prefers-color-scheme: light) {
+  .cat-8 {
+    border-left: 2px solid #ad102f;
+  }
 }
 
 .cat-9 {
-  border-left: 1px solid lightGray;
+  border-left: 2px solid yellow;
+}
+@media screen and (prefers-color-scheme: light) {
+  .cat-9 {
+    border-left: 2px solid #cccc00;
+  }
+}
+
+.cat-10 {
+  border-left: 2px solid #6800b5;
+}
+@media screen and (prefers-color-scheme: light) {
+  .cat-10 {
+    border-left: 2px solid indigo;
+  }
+}
+
+.cat-11 {
+  border-left: 2px solid lightGray;
 }
 
 /*# sourceMappingURL=App.css.map */

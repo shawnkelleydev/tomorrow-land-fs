@@ -36,29 +36,40 @@
       &:hover 
         color: black
 
-.cat-1
-  border-left: 1px solid lime
+$px: 2px
+
+.cat-1 //income
+  border-left: $px solid lime
   @media screen and (prefers-color-scheme: light)
-    border-left: 1px solid darken(lime, 10%)
-.cat-2
-  border-left: 1px solid aqua
+    border-left: $px solid darken(lime, 10%)
+.cat-2 //giving
+  border-left: $px solid aqua
   @media screen and (prefers-color-scheme: light)
-    border-left: 1px solid darken(aqua, 10%)
-.cat-3
-  border-left: 1px solid yellow
+    border-left: $px solid darken(aqua, 10%)
+.cat-3 //debt
+  border-left: $px solid deepPink
   @media screen and (prefers-color-scheme: light)
-    border-left: 1px solid darken(yellow, 10%)
-.cat-4
-  border-left: 1px solid blue
-.cat-5
-  border-left: 1px solid orange
-.cat-6
-  border-left: 1px solid lightGreen
+    border-left: $px solid darken(deepPink, 10%)
+.cat-4 // taxes
+  border-left: $px solid blue
+.cat-5 // insurance / property taxes
+  border-left: $px solid orange
+
+.cat-6, .cat-7 //saving, investing
+  border-left: $px solid lime
   @media screen and (prefers-color-scheme: light)
-    border-left: 1px solid green
-.cat-7
-  border-left: 1px solid red
-.cat-8
-  border-left: 1px solid purple
-.cat-9 
-  border-left: 1px solid lightGray
+    border-left: $px solid darken(lime, 10%)
+.cat-8 //utilities
+  border-left: $px solid crimson
+  @media screen and (prefers-color-scheme: light)
+    border-left: $px solid darken(crimson, 10%)
+.cat-9 // food
+  border-left: $px solid yellow
+  @media screen and (prefers-color-scheme: light)
+    border-left: $px solid darken(yellow, 10%)
+.cat-10 // transport
+  border-left: $px solid lighten(indigo, 10%)
+  @media screen and (prefers-color-scheme: light)
+    border-left: $px solid indigo
+.cat-11 // misc
+  border-left: $px solid lightGray
