@@ -14,13 +14,16 @@ export default function App() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
-    let str = localStorage.getItem("t");
-    if (str && str.match(/[a-zA-Z0-9]/g)) {
-      setSearchParams(`t=${str}`);
-    } else {
-      setSearchParams("");
+    console.log(searchParams.get("t"));
+    if (!searchParams.get("t")) {
+      let str = localStorage.getItem("t");
+      if (str && str.match(/[a-zA-Z0-9]/g)) {
+        setSearchParams(`t=${str}`);
+      } else {
+        localStorage.removeItem("t");
+      }
     }
-  }, [setSearchParams]);
+  }, [setSearchParams, searchParams]);
 
   useEffect(() => {
     let t = searchParams.get("t");

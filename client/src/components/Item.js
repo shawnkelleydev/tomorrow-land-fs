@@ -46,6 +46,9 @@ export default function Item(props) {
       t.length > 0
         ? t.map((item) => (item += "_")).reduce((str, item) => str + item)
         : "";
+    if (!t || t.length < 1) {
+      localStorage.removeItem("t");
+    }
     setSearchParams(`t=${t}`);
   }
 
