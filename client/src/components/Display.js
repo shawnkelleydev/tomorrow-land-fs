@@ -1,7 +1,6 @@
 import List from "./List";
 
 export default function Display(props) {
-  console.log(props.list);
   return (
     <div className="Display">
       {props.list.length > 0 ? (
